@@ -26,9 +26,16 @@ public class GlobalExceptionHandler {
         return buildError(400, "Bad Request", ex.getMessage());
     }
 
-    @ExceptionHandler({MissingServletRequestPartException.class, MissingServletRequestParameterException.class})
-    public ResponseEntity<ApiErrorResponse> handleMissingPart(Exception ex) {
-        return buildError(400, "Bad Request", "Thiếu dữ liệu file tải lên (field 'files').");
+    @ExceptionHandler(MissingServletRequestPartException.class)
+    public ResponseEntity<ApiErrorResponse> handleMissingPart(MissingServletRequestPartException ex) {
+        return buildError(400, "Bad Request",
+                "Thiếu dữ liệu tải lên ở trường '" + ex.getRequestPartName() + "'.");
+    }
+
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public ResponseEntity<ApiErrorResponse> handleMissingParam(MissingServletRequestParameterException ex) {
+        return buildError(400, "Bad Request",
+                "Thiếu tham số bắt buộc '" + ex.getParameterName() + "'.");
     }
 
     @ExceptionHandler(InvalidPasswordException.class)

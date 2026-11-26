@@ -1,2 +1,9 @@
 ilovepdf-nuxt-springboot-plan.md
-.vscode
+.vscode/
+
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
